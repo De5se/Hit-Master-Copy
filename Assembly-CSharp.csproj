@@ -52,9 +52,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Extensions\UIParticle\UIParticleSystem.cs" />
      <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelControlCasualGame.cs" />
      <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelCasualGame.cs" />
+     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Extensions\UIParticle\UIParticleSystem.cs" />
+     <Compile Include="Assets\_Scripts\PlayerMotion.cs" />
+     <Compile Include="Assets\_Scripts\CameraMotion.cs" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -671,13 +673,13 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{c8535ee8-3959-2e3e-dbec-02f29cd9dc4c}</Project>
-      <Name>NavMeshComponents</Name>
-    </ProjectReference>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
       <Project>{6c7d81c5-2936-f01f-8494-c27f19ee3fac}</Project>
       <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{c8535ee8-3959-2e3e-dbec-02f29cd9dc4c}</Project>
+      <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
