@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints: {fileID: 0}
+  animator: {fileID: 7367638035274651492}
+  nextPoint: 0
 --- !u!1001 &7452885860130376064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,6 +174,11 @@ PrefabInstance:
 --- !u!4 &7449907740487136842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4111819248598986, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
+  m_PrefabInstance: {fileID: 7452885860130376064}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7367638035274651492 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
   m_PrefabInstance: {fileID: 7452885860130376064}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7449889728433006620 stripped

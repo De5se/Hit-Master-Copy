@@ -16,10 +16,10 @@ namespace UnityEngine.UI.Extensions.CasualGame
         [Tooltip("Enables 3d rotation for the particles")]
         public bool use3dRotation = false;
 
-        private Transform _transform;
+        private Transform transform;
         private ParticleSystem pSystem;
         private ParticleSystem.Particle[] particles;
-        private UIVertex[] _quad = new UIVertex[4];
+        private UIVertex[] quad = new UIVertex[4];
         private Vector4 imageUV = Vector4.zero;
         private ParticleSystem.TextureSheetAnimationModule textureSheetAnimation;
         private int textureSheetAnimationFrames;
@@ -46,9 +46,9 @@ namespace UnityEngine.UI.Extensions.CasualGame
         protected bool Initialize()
         {
             // initialize members
-            if (_transform == null)
+            if (transform == null)
             {
-                _transform = transform;
+                transform = ((Component) this).transform;
             }
             if (pSystem == null)
             {
@@ -168,7 +168,7 @@ namespace UnityEngine.UI.Extensions.CasualGame
 
                 // get particle properties
 #if UNITY_5_5_OR_NEWER
-                Vector2 position = (mainModule.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
+                Vector2 position = (mainModule.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : transform.InverseTransformPoint(particle.position));
 #else
                     Vector2 position = (pSystem.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
 #endif
@@ -242,27 +242,27 @@ namespace UnityEngine.UI.Extensions.CasualGame
                 temp.x = particleUV.x;
                 temp.y = particleUV.y;
 
-                _quad[0] = UIVertex.simpleVert;
-                _quad[0].color = color;
-                _quad[0].uv0 = temp;
+                quad[0] = UIVertex.simpleVert;
+                quad[0].color = color;
+                quad[0].uv0 = temp;
 
                 temp.x = particleUV.x;
                 temp.y = particleUV.w;
-                _quad[1] = UIVertex.simpleVert;
-                _quad[1].color = color;
-                _quad[1].uv0 = temp;
+                quad[1] = UIVertex.simpleVert;
+                quad[1].color = color;
+                quad[1].uv0 = temp;
 
                 temp.x = particleUV.z;
                 temp.y = particleUV.w;
-                _quad[2] = UIVertex.simpleVert;
-                _quad[2].color = color;
-                _quad[2].uv0 = temp;
+                quad[2] = UIVertex.simpleVert;
+                quad[2].color = color;
+                quad[2].uv0 = temp;
 
                 temp.x = particleUV.z;
                 temp.y = particleUV.y;
-                _quad[3] = UIVertex.simpleVert;
-                _quad[3].color = color;
-                _quad[3].uv0 = temp;
+                quad[3] = UIVertex.simpleVert;
+                quad[3].color = color;
+                quad[3].uv0 = temp;
 
                 if (rotation == 0)
                 {
@@ -274,16 +274,16 @@ namespace UnityEngine.UI.Extensions.CasualGame
 
                     temp.x = corner1.x;
                     temp.y = corner1.y;
-                    _quad[0].position = temp;
+                    quad[0].position = temp;
                     temp.x = corner1.x;
                     temp.y = corner2.y;
-                    _quad[1].position = temp;
+                    quad[1].position = temp;
                     temp.x = corner2.x;
                     temp.y = corner2.y;
-                    _quad[2].position = temp;
+                    quad[2].position = temp;
                     temp.x = corner2.x;
                     temp.y = corner1.y;
-                    _quad[3].position = temp;
+                    quad[3].position = temp;
                 }
                 else
                 {
@@ -291,7 +291,7 @@ namespace UnityEngine.UI.Extensions.CasualGame
                     {
                         // get particle properties
 #if UNITY_5_5_OR_NEWER
-                        Vector3 pos3d = (mainModule.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
+                        Vector3 pos3d = (mainModule.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : transform.InverseTransformPoint(particle.position));
 #else
                         Vector3 pos3d = (pSystem.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
 #endif
@@ -315,10 +315,10 @@ namespace UnityEngine.UI.Extensions.CasualGame
 
                         Quaternion particleRotation = Quaternion.Euler(particle.rotation3D);
 
-                        _quad[0].position = pos3d + particleRotation * verts[0];
-                        _quad[1].position = pos3d + particleRotation * verts[1];
-                        _quad[2].position = pos3d + particleRotation * verts[2];
-                        _quad[3].position = pos3d + particleRotation * verts[3];
+                        quad[0].position = pos3d + particleRotation * verts[0];
+                        quad[1].position = pos3d + particleRotation * verts[1];
+                        quad[2].position = pos3d + particleRotation * verts[2];
+                        quad[3].position = pos3d + particleRotation * verts[3];
                     }
                     else
                     {
@@ -326,14 +326,14 @@ namespace UnityEngine.UI.Extensions.CasualGame
                         Vector2 right = new Vector2(Mathf.Cos(rotation), Mathf.Sin(rotation)) * size;
                         Vector2 up = new Vector2(Mathf.Cos(rotation90), Mathf.Sin(rotation90)) * size;
 
-                        _quad[0].position = position - right - up;
-                        _quad[1].position = position - right + up;
-                        _quad[2].position = position + right + up;
-                        _quad[3].position = position + right - up;
+                        quad[0].position = position - right - up;
+                        quad[1].position = position - right + up;
+                        quad[2].position = position + right + up;
+                        quad[3].position = position + right - up;
                     }
                 }
 
-                vh.AddUIVertexQuad(_quad);
+                vh.AddUIVertexQuad(quad);
             }
         }
 

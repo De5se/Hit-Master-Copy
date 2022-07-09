@@ -16,44 +16,44 @@ namespace UnityEditor.AI
     [CustomEditor(typeof(NavMeshSurface))]
     class NavMeshSurfaceEditor : Editor
     {
-        SerializedProperty m_AgentTypeID;
-        SerializedProperty m_BuildHeightMesh;
-        SerializedProperty m_Center;
-        SerializedProperty m_CollectObjects;
-        SerializedProperty m_DefaultArea;
-        SerializedProperty m_LayerMask;
-        SerializedProperty m_OverrideTileSize;
-        SerializedProperty m_OverrideVoxelSize;
-        SerializedProperty m_Size;
-        SerializedProperty m_TileSize;
-        SerializedProperty m_UseGeometry;
-        SerializedProperty m_VoxelSize;
+        SerializedProperty mAgentTypeID;
+        SerializedProperty mBuildHeightMesh;
+        SerializedProperty mCenter;
+        SerializedProperty mCollectObjects;
+        SerializedProperty mDefaultArea;
+        SerializedProperty mLayerMask;
+        SerializedProperty mOverrideTileSize;
+        SerializedProperty mOverrideVoxelSize;
+        SerializedProperty mSize;
+        SerializedProperty mTileSize;
+        SerializedProperty mUseGeometry;
+        SerializedProperty mVoxelSize;
 
 #if NAVMESHCOMPONENTS_SHOW_NAVMESHDATA_REF
-        SerializedProperty m_NavMeshData;
+        SerializedProperty mNavMeshData;
 #endif
         class Styles
         {
-            public readonly GUIContent m_LayerMask = new GUIContent("Include Layers");
+            public readonly GUIContent MLayerMask = new GUIContent("Include Layers");
 
-            public readonly GUIContent m_ShowInputGeom = new GUIContent("Show Input Geom");
-            public readonly GUIContent m_ShowVoxels = new GUIContent("Show Voxels");
-            public readonly GUIContent m_ShowRegions = new GUIContent("Show Regions");
-            public readonly GUIContent m_ShowRawContours = new GUIContent("Show Raw Contours");
-            public readonly GUIContent m_ShowContours = new GUIContent("Show Contours");
-            public readonly GUIContent m_ShowPolyMesh = new GUIContent("Show Poly Mesh");
-            public readonly GUIContent m_ShowPolyMeshDetail = new GUIContent("Show Poly Mesh Detail");
+            public readonly GUIContent MShowInputGeom = new GUIContent("Show Input Geom");
+            public readonly GUIContent MShowVoxels = new GUIContent("Show Voxels");
+            public readonly GUIContent MShowRegions = new GUIContent("Show Regions");
+            public readonly GUIContent MShowRawContours = new GUIContent("Show Raw Contours");
+            public readonly GUIContent MShowContours = new GUIContent("Show Contours");
+            public readonly GUIContent MShowPolyMesh = new GUIContent("Show Poly Mesh");
+            public readonly GUIContent MShowPolyMeshDetail = new GUIContent("Show Poly Mesh Detail");
         }
 
-        static Styles s_Styles;
+        static Styles _sStyles;
 
-        static bool s_ShowDebugOptions;
+        static bool _sShowDebugOptions;
 
-        static Color s_HandleColor = new Color(127f, 214f, 244f, 100f) / 255;
-        static Color s_HandleColorSelected = new Color(127f, 214f, 244f, 210f) / 255;
-        static Color s_HandleColorDisabled = new Color(127f * 0.75f, 214f * 0.75f, 244f * 0.75f, 100f) / 255;
+        static Color _sHandleColor = new Color(127f, 214f, 244f, 100f) / 255;
+        static Color _sHandleColorSelected = new Color(127f, 214f, 244f, 210f) / 255;
+        static Color _sHandleColorDisabled = new Color(127f * 0.75f, 214f * 0.75f, 244f * 0.75f, 100f) / 255;
 
-        BoxBoundsHandle m_BoundsHandle = new BoxBoundsHandle();
+        BoxBoundsHandle mBoundsHandle = new BoxBoundsHandle();
 
         bool editingCollider
         {
@@ -62,21 +62,21 @@ namespace UnityEditor.AI
 
         void OnEnable()
         {
-            m_AgentTypeID = serializedObject.FindProperty("m_AgentTypeID");
-            m_BuildHeightMesh = serializedObject.FindProperty("m_BuildHeightMesh");
-            m_Center = serializedObject.FindProperty("m_Center");
-            m_CollectObjects = serializedObject.FindProperty("m_CollectObjects");
-            m_DefaultArea = serializedObject.FindProperty("m_DefaultArea");
-            m_LayerMask = serializedObject.FindProperty("m_LayerMask");
-            m_OverrideTileSize = serializedObject.FindProperty("m_OverrideTileSize");
-            m_OverrideVoxelSize = serializedObject.FindProperty("m_OverrideVoxelSize");
-            m_Size = serializedObject.FindProperty("m_Size");
-            m_TileSize = serializedObject.FindProperty("m_TileSize");
-            m_UseGeometry = serializedObject.FindProperty("m_UseGeometry");
-            m_VoxelSize = serializedObject.FindProperty("m_VoxelSize");
+            mAgentTypeID = serializedObject.FindProperty("m_AgentTypeID");
+            mBuildHeightMesh = serializedObject.FindProperty("m_BuildHeightMesh");
+            mCenter = serializedObject.FindProperty("m_Center");
+            mCollectObjects = serializedObject.FindProperty("m_CollectObjects");
+            mDefaultArea = serializedObject.FindProperty("m_DefaultArea");
+            mLayerMask = serializedObject.FindProperty("m_LayerMask");
+            mOverrideTileSize = serializedObject.FindProperty("m_OverrideTileSize");
+            mOverrideVoxelSize = serializedObject.FindProperty("m_OverrideVoxelSize");
+            mSize = serializedObject.FindProperty("m_Size");
+            mTileSize = serializedObject.FindProperty("m_TileSize");
+            mUseGeometry = serializedObject.FindProperty("m_UseGeometry");
+            mVoxelSize = serializedObject.FindProperty("m_VoxelSize");
 
 #if NAVMESHCOMPONENTS_SHOW_NAVMESHDATA_REF
-            m_NavMeshData = serializedObject.FindProperty("m_NavMeshData");
+            mNavMeshData = serializedObject.FindProperty("m_NavMeshData");
 #endif
             NavMeshVisualizationSettings.showNavigation++;
         }
@@ -94,12 +94,12 @@ namespace UnityEditor.AI
 
         public override void OnInspectorGUI()
         {
-            if (s_Styles == null)
-                s_Styles = new Styles();
+            if (_sStyles == null)
+                _sStyles = new Styles();
 
             serializedObject.Update();
 
-            var bs = NavMesh.GetSettingsByID(m_AgentTypeID.intValue);
+            var bs = NavMesh.GetSettingsByID(mAgentTypeID.intValue);
 
             if (bs.agentTypeID != -1)
             {
@@ -108,19 +108,19 @@ namespace UnityEditor.AI
                 Rect agentDiagramRect = EditorGUILayout.GetControlRect(false, diagramHeight);
                 NavMeshEditorHelpers.DrawAgentDiagram(agentDiagramRect, bs.agentRadius, bs.agentHeight, bs.agentClimb, bs.agentSlope);
             }
-            NavMeshComponentsGUIUtility.AgentTypePopup("Agent Type", m_AgentTypeID);
+            NavMeshComponentsGUIUtility.AgentTypePopup("Agent Type", mAgentTypeID);
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(m_CollectObjects);
-            if ((CollectObjects)m_CollectObjects.enumValueIndex == CollectObjects.Volume)
+            EditorGUILayout.PropertyField(mCollectObjects);
+            if ((CollectObjects)mCollectObjects.enumValueIndex == CollectObjects.Volume)
             {
                 EditorGUI.indentLevel++;
 
                 EditMode.DoEditModeInspectorModeButton(EditMode.SceneViewEditMode.Collider, "Edit Volume",
                     EditorGUIUtility.IconContent("EditCollider"), GetBounds, this);
-                EditorGUILayout.PropertyField(m_Size);
-                EditorGUILayout.PropertyField(m_Center);
+                EditorGUILayout.PropertyField(mSize);
+                EditorGUILayout.PropertyField(mCenter);
 
                 EditorGUI.indentLevel--;
             }
@@ -130,58 +130,58 @@ namespace UnityEditor.AI
                     EditMode.QuitEditMode();
             }
 
-            EditorGUILayout.PropertyField(m_LayerMask, s_Styles.m_LayerMask);
-            EditorGUILayout.PropertyField(m_UseGeometry);
+            EditorGUILayout.PropertyField(mLayerMask, _sStyles.MLayerMask);
+            EditorGUILayout.PropertyField(mUseGeometry);
 
             EditorGUILayout.Space();
 
-            m_OverrideVoxelSize.isExpanded = EditorGUILayout.Foldout(m_OverrideVoxelSize.isExpanded, "Advanced");
-            if (m_OverrideVoxelSize.isExpanded)
+            mOverrideVoxelSize.isExpanded = EditorGUILayout.Foldout(mOverrideVoxelSize.isExpanded, "Advanced");
+            if (mOverrideVoxelSize.isExpanded)
             {
                 EditorGUI.indentLevel++;
 
-                NavMeshComponentsGUIUtility.AreaPopup("Default Area", m_DefaultArea);
+                NavMeshComponentsGUIUtility.AreaPopup("Default Area", mDefaultArea);
 
                 // Override voxel size.
-                EditorGUILayout.PropertyField(m_OverrideVoxelSize);
+                EditorGUILayout.PropertyField(mOverrideVoxelSize);
 
-                using (new EditorGUI.DisabledScope(!m_OverrideVoxelSize.boolValue || m_OverrideVoxelSize.hasMultipleDifferentValues))
+                using (new EditorGUI.DisabledScope(!mOverrideVoxelSize.boolValue || mOverrideVoxelSize.hasMultipleDifferentValues))
                 {
                     EditorGUI.indentLevel++;
 
-                    EditorGUILayout.PropertyField(m_VoxelSize);
+                    EditorGUILayout.PropertyField(mVoxelSize);
 
-                    if (!m_OverrideVoxelSize.hasMultipleDifferentValues)
+                    if (!mOverrideVoxelSize.hasMultipleDifferentValues)
                     {
-                        if (!m_AgentTypeID.hasMultipleDifferentValues)
+                        if (!mAgentTypeID.hasMultipleDifferentValues)
                         {
-                            float voxelsPerRadius = m_VoxelSize.floatValue > 0.0f ? (bs.agentRadius / m_VoxelSize.floatValue) : 0.0f;
+                            float voxelsPerRadius = mVoxelSize.floatValue > 0.0f ? (bs.agentRadius / mVoxelSize.floatValue) : 0.0f;
                             EditorGUILayout.LabelField(" ", voxelsPerRadius.ToString("0.00") + " voxels per agent radius", EditorStyles.miniLabel);
                         }
-                        if (m_OverrideVoxelSize.boolValue)
+                        if (mOverrideVoxelSize.boolValue)
                             EditorGUILayout.HelpBox("Voxel size controls how accurately the navigation mesh is generated from the level geometry. A good voxel size is 2-4 voxels per agent radius. Making voxel size smaller will increase build time.", MessageType.None);
                     }
                     EditorGUI.indentLevel--;
                 }
 
                 // Override tile size
-                EditorGUILayout.PropertyField(m_OverrideTileSize);
+                EditorGUILayout.PropertyField(mOverrideTileSize);
 
-                using (new EditorGUI.DisabledScope(!m_OverrideTileSize.boolValue || m_OverrideTileSize.hasMultipleDifferentValues))
+                using (new EditorGUI.DisabledScope(!mOverrideTileSize.boolValue || mOverrideTileSize.hasMultipleDifferentValues))
                 {
                     EditorGUI.indentLevel++;
 
-                    EditorGUILayout.PropertyField(m_TileSize);
+                    EditorGUILayout.PropertyField(mTileSize);
 
-                    if (!m_TileSize.hasMultipleDifferentValues && !m_VoxelSize.hasMultipleDifferentValues)
+                    if (!mTileSize.hasMultipleDifferentValues && !mVoxelSize.hasMultipleDifferentValues)
                     {
-                        float tileWorldSize = m_TileSize.intValue * m_VoxelSize.floatValue;
+                        float tileWorldSize = mTileSize.intValue * mVoxelSize.floatValue;
                         EditorGUILayout.LabelField(" ", tileWorldSize.ToString("0.00") + " world units", EditorStyles.miniLabel);
                     }
 
-                    if (!m_OverrideTileSize.hasMultipleDifferentValues)
+                    if (!mOverrideTileSize.hasMultipleDifferentValues)
                     {
-                        if (m_OverrideTileSize.boolValue)
+                        if (mOverrideTileSize.boolValue)
                             EditorGUILayout.HelpBox("Tile size controls the how local the changes to the world are (rebuild or carve). Small tile size allows more local changes, while potentially generating more data overall.", MessageType.None);
                     }
                     EditorGUI.indentLevel--;
@@ -191,7 +191,7 @@ namespace UnityEditor.AI
                 // Height mesh
                 using (new EditorGUI.DisabledScope(true))
                 {
-                    EditorGUILayout.PropertyField(m_BuildHeightMesh);
+                    EditorGUILayout.PropertyField(mBuildHeightMesh);
                 }
 
                 EditorGUILayout.Space();
@@ -239,18 +239,18 @@ namespace UnityEditor.AI
 #if NAVMESHCOMPONENTS_SHOW_NAVMESHDATA_REF
             var nmdRect = EditorGUILayout.GetControlRect(true, EditorGUIUtility.singleLineHeight);
 
-            EditorGUI.BeginProperty(nmdRect, GUIContent.none, m_NavMeshData);
-            var rectLabel = EditorGUI.PrefixLabel(nmdRect, GUIUtility.GetControlID(FocusType.Passive), new GUIContent(m_NavMeshData.displayName));
+            EditorGUI.BeginProperty(nmdRect, GUIContent.none, mNavMeshData);
+            var rectLabel = EditorGUI.PrefixLabel(nmdRect, GUIUtility.GetControlID(FocusType.Passive), new GUIContent(mNavMeshData.displayName));
             EditorGUI.EndProperty();
 
             using (new EditorGUI.DisabledScope(true))
             {
-                EditorGUI.BeginProperty(nmdRect, GUIContent.none, m_NavMeshData);
-                EditorGUI.ObjectField(rectLabel, m_NavMeshData, GUIContent.none);
+                EditorGUI.BeginProperty(nmdRect, GUIContent.none, mNavMeshData);
+                EditorGUI.ObjectField(rectLabel, mNavMeshData, GUIContent.none);
                 EditorGUI.EndProperty();
             }
 #endif
-            using (new EditorGUI.DisabledScope(Application.isPlaying || m_AgentTypeID.intValue == -1))
+            using (new EditorGUI.DisabledScope(Application.isPlaying || mAgentTypeID.intValue == -1))
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Space(EditorGUIUtility.labelWidth);
@@ -272,10 +272,10 @@ namespace UnityEditor.AI
             var bakeOperations = NavMeshAssetManager.instance.GetBakeOperations();
             for (int i = bakeOperations.Count - 1; i >= 0; --i)
             {
-                if (!targets.Contains(bakeOperations[i].surface))
+                if (!targets.Contains(bakeOperations[i].Surface))
                     continue;
 
-                var oper = bakeOperations[i].bakeOperation;
+                var oper = bakeOperations[i].BakeOperation;
                 if (oper == null)
                     continue;
 
@@ -290,7 +290,7 @@ namespace UnityEditor.AI
 
                 if (GUILayout.Button("Cancel", EditorStyles.miniButton))
                 {
-                    var bakeData = bakeOperations[i].bakeData;
+                    var bakeData = bakeOperations[i].BakeData;
                     UnityEngine.AI.NavMeshBuilder.Cancel(bakeData);
                     bakeOperations.RemoveAt(i);
                 }
@@ -320,9 +320,9 @@ namespace UnityEditor.AI
 
         static void RenderBoxGizmo(NavMeshSurface navSurface, GizmoType gizmoType, bool selected)
         {
-            var color = selected ? s_HandleColorSelected : s_HandleColor;
+            var color = selected ? _sHandleColorSelected : _sHandleColor;
             if (!navSurface.enabled)
-                color = s_HandleColorDisabled;
+                color = _sHandleColorDisabled;
 
             var oldColor = Gizmos.color;
             var oldMatrix = Gizmos.matrix;
@@ -365,20 +365,20 @@ namespace UnityEditor.AI
                 return;
 
             var navSurface = (NavMeshSurface)target;
-            var color = navSurface.enabled ? s_HandleColor : s_HandleColorDisabled;
+            var color = navSurface.enabled ? _sHandleColor : _sHandleColorDisabled;
             var localToWorld = Matrix4x4.TRS(navSurface.transform.position, navSurface.transform.rotation, Vector3.one);
             using (new Handles.DrawingScope(color, localToWorld))
             {
-                m_BoundsHandle.center = navSurface.center;
-                m_BoundsHandle.size = navSurface.size;
+                mBoundsHandle.center = navSurface.center;
+                mBoundsHandle.size = navSurface.size;
 
                 EditorGUI.BeginChangeCheck();
-                m_BoundsHandle.DrawHandle();
+                mBoundsHandle.DrawHandle();
                 if (EditorGUI.EndChangeCheck())
                 {
                     Undo.RecordObject(navSurface, "Modified NavMesh Surface");
-                    Vector3 center = m_BoundsHandle.center;
-                    Vector3 size = m_BoundsHandle.size;
+                    Vector3 center = mBoundsHandle.center;
+                    Vector3 size = mBoundsHandle.size;
                     navSurface.center = center;
                     navSurface.size = size;
                     EditorUtility.SetDirty(target);

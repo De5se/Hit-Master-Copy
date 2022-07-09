@@ -7,34 +7,34 @@ namespace UnityEditor.AI
     [CustomEditor(typeof(NavMeshLink))]
     class NavMeshLinkEditor : Editor
     {
-        SerializedProperty m_AgentTypeID;
-        SerializedProperty m_Area;
-        SerializedProperty m_CostModifier;
-        SerializedProperty m_AutoUpdatePosition;
-        SerializedProperty m_Bidirectional;
-        SerializedProperty m_EndPoint;
-        SerializedProperty m_StartPoint;
-        SerializedProperty m_Width;
+        SerializedProperty mAgentTypeID;
+        SerializedProperty mArea;
+        SerializedProperty mCostModifier;
+        SerializedProperty mAutoUpdatePosition;
+        SerializedProperty mBidirectional;
+        SerializedProperty mEndPoint;
+        SerializedProperty mStartPoint;
+        SerializedProperty mWidth;
 
-        static int s_SelectedID;
-        static int s_SelectedPoint = -1;
+        static int _sSelectedID;
+        static int _sSelectedPoint = -1;
 
-        static Color s_HandleColor = new Color(255f, 167f, 39f, 210f) / 255;
-        static Color s_HandleColorDisabled = new Color(255f * 0.75f, 167f * 0.75f, 39f * 0.75f, 100f) / 255;
+        static Color _sHandleColor = new Color(255f, 167f, 39f, 210f) / 255;
+        static Color _sHandleColorDisabled = new Color(255f * 0.75f, 167f * 0.75f, 39f * 0.75f, 100f) / 255;
 
         void OnEnable()
         {
-            m_AgentTypeID = serializedObject.FindProperty("m_AgentTypeID");
-            m_Area = serializedObject.FindProperty("m_Area");
-            m_CostModifier = serializedObject.FindProperty("m_CostModifier");
-            m_AutoUpdatePosition = serializedObject.FindProperty("m_AutoUpdatePosition");
-            m_Bidirectional = serializedObject.FindProperty("m_Bidirectional");
-            m_EndPoint = serializedObject.FindProperty("m_EndPoint");
-            m_StartPoint = serializedObject.FindProperty("m_StartPoint");
-            m_Width = serializedObject.FindProperty("m_Width");
+            mAgentTypeID = serializedObject.FindProperty("m_AgentTypeID");
+            mArea = serializedObject.FindProperty("m_Area");
+            mCostModifier = serializedObject.FindProperty("m_CostModifier");
+            mAutoUpdatePosition = serializedObject.FindProperty("m_AutoUpdatePosition");
+            mBidirectional = serializedObject.FindProperty("m_Bidirectional");
+            mEndPoint = serializedObject.FindProperty("m_EndPoint");
+            mStartPoint = serializedObject.FindProperty("m_StartPoint");
+            mWidth = serializedObject.FindProperty("m_Width");
 
-            s_SelectedID = 0;
-            s_SelectedPoint = -1;
+            _sSelectedID = 0;
+            _sSelectedPoint = -1;
 
             NavMeshVisualizationSettings.showNavigation++;
         }
@@ -75,11 +75,11 @@ namespace UnityEditor.AI
         {
             serializedObject.Update();
 
-            NavMeshComponentsGUIUtility.AgentTypePopup("Agent Type", m_AgentTypeID);
+            NavMeshComponentsGUIUtility.AgentTypePopup("Agent Type", mAgentTypeID);
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(m_StartPoint);
-            EditorGUILayout.PropertyField(m_EndPoint);
+            EditorGUILayout.PropertyField(mStartPoint);
+            EditorGUILayout.PropertyField(mEndPoint);
 
             GUILayout.BeginHorizontal();
             GUILayout.Space(EditorGUIUtility.labelWidth);
@@ -106,12 +106,12 @@ namespace UnityEditor.AI
             GUILayout.EndHorizontal();
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(m_Width);
-            EditorGUILayout.PropertyField(m_CostModifier);
-            EditorGUILayout.PropertyField(m_AutoUpdatePosition);
-            EditorGUILayout.PropertyField(m_Bidirectional);
+            EditorGUILayout.PropertyField(mWidth);
+            EditorGUILayout.PropertyField(mCostModifier);
+            EditorGUILayout.PropertyField(mAutoUpdatePosition);
+            EditorGUILayout.PropertyField(mBidirectional);
 
-            NavMeshComponentsGUIUtility.AreaPopup("Area Type", m_Area);
+            NavMeshComponentsGUIUtility.AreaPopup("Area Type", mArea);
 
             serializedObject.ApplyModifiedProperties();
 
@@ -141,9 +141,9 @@ namespace UnityEditor.AI
             if (!EditorApplication.isPlaying)
                 navLink.UpdateLink();
 
-            var color = s_HandleColor;
+            var color = _sHandleColor;
             if (!navLink.enabled)
-                color = s_HandleColorDisabled;
+                color = _sHandleColorDisabled;
 
             var oldColor = Gizmos.color;
             var oldMatrix = Gizmos.matrix;
@@ -164,9 +164,9 @@ namespace UnityEditor.AI
         {
             if (NavMeshVisualizationSettings.showNavigation > 0)
             {
-                var color = s_HandleColor;
+                var color = _sHandleColor;
                 if (!navLink.enabled)
-                    color = s_HandleColorDisabled;
+                    color = _sHandleColorDisabled;
 
                 var oldColor = Gizmos.color;
                 var oldMatrix = Gizmos.matrix;
@@ -202,11 +202,11 @@ namespace UnityEditor.AI
             var right = mat.MultiplyVector(CalcLinkRight(navLink));
 
             var oldColor = Handles.color;
-            Handles.color = s_HandleColor;
+            Handles.color = _sHandleColor;
 
             Vector3 pos;
 
-            if (navLink.GetInstanceID() == s_SelectedID && s_SelectedPoint == 0)
+            if (navLink.GetInstanceID() == _sSelectedID && _sSelectedPoint == 0)
             {
                 EditorGUI.BeginChangeCheck();
                 Handles.CubeHandleCap(0, startPt, zup, 0.1f * startSize, Event.current.type);
@@ -221,12 +221,12 @@ namespace UnityEditor.AI
             {
                 if (Handles.Button(startPt, zup, 0.1f * startSize, 0.1f * startSize, Handles.CubeHandleCap))
                 {
-                    s_SelectedPoint = 0;
-                    s_SelectedID = navLink.GetInstanceID();
+                    _sSelectedPoint = 0;
+                    _sSelectedID = navLink.GetInstanceID();
                 }
             }
 
-            if (navLink.GetInstanceID() == s_SelectedID && s_SelectedPoint == 1)
+            if (navLink.GetInstanceID() == _sSelectedID && _sSelectedPoint == 1)
             {
                 EditorGUI.BeginChangeCheck();
                 Handles.CubeHandleCap(0, endPt, zup, 0.1f * startSize, Event.current.type);
@@ -241,8 +241,8 @@ namespace UnityEditor.AI
             {
                 if (Handles.Button(endPt, zup, 0.1f * endSize, 0.1f * endSize, Handles.CubeHandleCap))
                 {
-                    s_SelectedPoint = 1;
-                    s_SelectedID = navLink.GetInstanceID();
+                    _sSelectedPoint = 1;
+                    _sSelectedID = navLink.GetInstanceID();
                 }
             }
 
