@@ -52,15 +52,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelControlCasualGame.cs" />
-     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelCasualGame.cs" />
-     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Extensions\UIParticle\UIParticleSystem.cs" />
-     <Compile Include="Assets\_Scripts\Player\PlayerMotion.cs" />
      <Compile Include="Assets\_Scripts\Player\CameraMotion.cs" />
+     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelControlCasualGame.cs" />
      <Compile Include="Assets\_Scripts\Units\RagdollController.cs" />
-     <Compile Include="Assets\_Scripts\Units\UnitStats.cs" />
-     <Compile Include="Assets\_Scripts\Billboard.cs" />
      <Compile Include="Assets\_Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Scripts\PanelCasualGame.cs" />
+     <Compile Include="Assets\_Scripts\Billboard.cs" />
+     <Compile Include="Assets\Third-party\GUI PRO Kit - Casual Game\Extensions\UIParticle\UIParticleSystem.cs" />
+     <Compile Include="Assets\_Scripts\Units\UnitStats.cs" />
+     <Compile Include="Assets\_Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\_Scripts\Player\Shooting.cs" />
+     <Compile Include="Assets\_Scripts\Bulet.cs" />
+     <Compile Include="Assets\_Scripts\BulletPool.cs" />
+     <Compile Include="Assets\_Scripts\Interfaces\ObjectFromPool.cs" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Third-party\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
