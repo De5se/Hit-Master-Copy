@@ -10,7 +10,8 @@ public class Bulet : MonoBehaviour, ObjectFromPool
     
     private void Update()
     {
-        transform.position += Vector3.forward * speed * Time.deltaTime;
+        var direction = transform.rotation * Vector3.forward;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)

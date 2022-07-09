@@ -41,9 +41,9 @@ public class BulletPool : MonoBehaviour
         
         var objectToSpawn = bullets.Dequeue();
         
-        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = instantiatePosition;
         objectToSpawn.transform.rotation = instantiateRotation;
+        objectToSpawn.SetActive(true);
         objectToSpawn.GetComponent<ObjectFromPool>()?.OnObjectSpawned();
 
         return objectToSpawn;
