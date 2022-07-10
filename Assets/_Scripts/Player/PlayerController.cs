@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             shooting.Shoot();
+            AnimateShooting();
         }
     }
 
@@ -66,5 +67,10 @@ public class PlayerController : MonoBehaviour
     {
         var isWalking = navMeshAgent.velocity.magnitude > 0;
         animator.SetBool("IsWalking", isWalking);
+    }
+
+    private void AnimateShooting()
+    {
+        animator.Play("Shooting");
     }
 }
