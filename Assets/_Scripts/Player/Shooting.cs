@@ -16,7 +16,7 @@ public class Shooting : MonoBehaviour
 
     public void Shoot()
     {
-        var relativePos = GetTapPosition() - transform.position;
+        var relativePos = GetTapPosition() - bulletPosition.position;
         var targetRotation = Quaternion.LookRotation(relativePos);
         
         BulletPool.Instance.SpawnFromPool(bulletPosition.position, targetRotation);

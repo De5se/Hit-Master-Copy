@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class UnitStats : MonoBehaviour
 {
     [SerializeField] private int hp;
+    [SerializeField] private Slider hpBar;
     
     private RagdollController ragdollController;
-    [SerializeField] private Slider hpBar;
-
+    
     private void Start()
     {
         hpBar.maxValue = hp;
@@ -27,16 +27,25 @@ public class UnitStats : MonoBehaviour
         
         if (hp == 0)
         {
-            ragdollController.ActivateRagdoll(true);
+            Death();
         }
     }
 
     private void UpdateHpBar()
     {
-        if (hp == 0)
-        {
-            hpBar.gameObject.SetActive(false);
-        }
         hpBar.value = hp;
+    }
+
+
+    private void Death()
+    {
+        ragdollController.ActivateRagdoll(true);
+        hpBar.gameObject.SetActive(false);
+        WayPoints.Instance.OnUnitDeath();
+    }
+
+    public bool IsAlive()
+    {
+        return hp > 0;
     }
 }

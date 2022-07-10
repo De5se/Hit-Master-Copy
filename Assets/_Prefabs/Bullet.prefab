@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 7889030488487868890}
   - component: {fileID: 7912749284124529562}
   - component: {fileID: -4310192123474815926}
+  - component: {fileID: 7750900672560944351}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -240,4 +241,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  liveTime: 2
+  damage: 1
+  explosionForce: 10
+  explosionRadius: 3
+  liveTime: 3
+--- !u!54 &7750900672560944351
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7867613261590313584}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3

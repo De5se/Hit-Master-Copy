@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1629828007311439645}
   - component: {fileID: -7257575396700412377}
   - component: {fileID: 8993372032973831214}
+  - component: {fileID: 1994331849082970821}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wayPoints: {fileID: 0}
   animator: {fileID: 7367638035274651492}
-  nextPoint: 0
 --- !u!114 &8993372032973831214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPosition: {fileID: 8642101012769084557}
+--- !u!143 &1994331849082970821
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7452885858890961972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.38
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &7452885860130376064
 PrefabInstance:
   m_ObjectHideFlags: 0

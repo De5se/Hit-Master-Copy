@@ -15,15 +15,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     private int currentPoint;
 
-    public bool nextPoint;
-
-    private void OnValidate()
+    #region Singleton
+    
+    public static PlayerController Instance;
+    
+    private void Awake()
     {
-        if (!nextPoint) return;
-        nextPoint = false;
-        NextPoint();
+        Instance = this;
     }
-
+    #endregion
+    
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
         NextPoint();
     }
 
-    private void NextPoint()
+    public void NextPoint()
     {
         currentPoint++;
         if (wayPoints.childCount <= currentPoint)
